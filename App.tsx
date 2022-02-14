@@ -7,12 +7,14 @@ import {
   Platform,
 
 } from "react-native";
+import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
   const handlePress = () => console.log("button pressed");
   
   return <WelcomeScreen />;
+  // return <ViewImageScreen />;
 
   // return (
   //   // safe area view only for iOs, in andriod need padding

@@ -3,6 +3,7 @@ export interface MyColors {
     secondary: string,
     black: string,
     white: string,
+    medium: string,
 }
 
 export const colors: MyColors = {
@@ -10,4 +11,5 @@ export const colors: MyColors = {
     secondary: '#4ecdc4',
     black: '#000',
     white: '#fff',
+    medium: '#6e6969',
 }

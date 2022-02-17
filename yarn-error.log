@@ -1,0 +1,63 @@
+Arguments: 
+  /snap/node/5880/bin/node /snap/node/5880/bin/yarn.js global dir
+
+PATH: 
+  /home/kavinduchamith/Documents/Personal/practice/react-native/DoneWithIt/node_modules/.bin:/home/kavinduchamith/Documents/Personal/practice/react-native/node_modules/.bin:/home/kavinduchamith/Documents/Personal/practice/node_modules/.bin:/home/kavinduchamith/Documents/Personal/node_modules/.bin:/home/kavinduchamith/Documents/node_modules/.bin:/home/kavinduchamith/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/snap/node/5880/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/home/kavinduchamith/.krew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  16.14.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: EACCES: permission denied, write
+      at writeSync (node:fs:884:3)
+      at SyncWriteStream._write (node:internal/fs/sync_write_stream:25:3)
+      at writeOrBuffer (node:internal/streams/writable:389:12)
+      at _write (node:internal/streams/writable:330:10)
+      at SyncWriteStream.Writable.write (node:internal/streams/writable:334:10)
+      at ConsoleReporter._log (/snap/node/5880/lib/cli.js:96904:17)
+      at ConsoleReporter.log (/snap/node/5880/lib/cli.js:96892:10)
+      at dir (/snap/node/5880/lib/cli.js:36299:14)
+      at Object.<anonymous> (/snap/node/5880/lib/cli.js:25983:25)
+      at Generator.next (<anonymous>)
+
+npm manifest: 
+  {
+    "name": "donewithit",
+    "version": "1.0.0",
+    "main": "node_modules/expo/AppEntry.js",
+    "scripts": {
+      "start": "expo start",
+      "android": "expo start --android",
+      "ios": "expo start --ios",
+      "web": "expo start --web",
+      "eject": "expo eject"
+    },
+    "dependencies": {
+      "@react-native-community/hooks": "^2.8.1",
+      "expo": "~44.0.0",
+      "expo-status-bar": "~1.2.0",
+      "react": "17.0.1",
+      "react-dom": "17.0.1",
+      "react-native": "0.64.3",
+      "react-native-web": "0.17.1"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.12.9",
+      "@types/react": "~17.0.21",
+      "@types/react-native": "~0.64.12",
+      "typescript": "~4.3.5"
+    },
+    "private": true
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

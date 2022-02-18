@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Card from "./app/components/Card";
 import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
+import MessageScreen from "./app/screens/MessageScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
@@ -17,7 +18,8 @@ export default function App() {
   
   // return <WelcomeScreen />;
   // return <ListingDetailsScreen></ListingDetailsScreen>;
-  return <ViewImageScreen />;
+  // return <ViewImageScreen />;
+  return <MessageScreen />;
 
   // return (
   //   // safe area view only for iOs, in andriod need padding

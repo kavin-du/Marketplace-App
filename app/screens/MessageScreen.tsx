@@ -4,6 +4,7 @@ import ListItem from '../components/ListItem';
 import Screen from '../components/Screen';
 import ListItemSeparator from '../components/ListItemSeparator';
 import ListItemDeleteAction from '../components/ListItemDeleteAction';
+import Icon from '../components/Icon';
 
 const initialMessages = [
     {
@@ -21,8 +22,9 @@ const initialMessages = [
 ];
 
 export default function MessageScreen() {
-
+    // need to be on the top of function component
     const [messages, setMessages] = useState(initialMessages);
+    const [refreshing, setRefreshing] = useState(false);
 
     const handleDelete = (message: any) => {
         const newMessages = messages.filter(m => m.id !== message.id);
@@ -39,9 +41,19 @@ export default function MessageScreen() {
                     subtitle={item.description}
                     image={item.image}
                     onPress={() => console.log('pressed', item)}
-                    renderRightActions={() => <ListItemDeleteAction onPress={() => handleDelete(item)} />}
-                />}
+                    renderRightActions={() => <ListItemDeleteAction onPress={() => handleDelete(item)} />} 
+                    // MyImageComponent={<Icon name='email' size={40} />}
+                    />}
                 ItemSeparatorComponent={ListItemSeparator}
+                refreshing={refreshing}
+                onRefresh={() => {
+                    setMessages([{ // fetch from backend
+                        id: 2,
+                        title: 'T2',
+                        description: 'D2',
+                        image: require('../assets/chair.jpg'),
+                    }]);
+                }}
             />
         </Screen>
     )

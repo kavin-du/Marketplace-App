@@ -2,7 +2,7 @@ import { Platform, SafeAreaView, StatusBar, StyleProp, StyleSheet, Text, View } 
 import React from 'react'
 import Constants from 'expo-constants'
 
-export default function Screen(props: { children: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined , style: StyleProp<any>}) {
+export default function Screen(props: { children: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined , style?: StyleProp<any>}) {
     return (
         <SafeAreaView style={[styles.screen, props.style]}>
             {props.children}

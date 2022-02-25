@@ -29,7 +29,7 @@ export default function App() {
   // return <ListingScreen />
   return (
     <Screen>
-      <AppTextInput icon='email'/>
+      <AppTextInput placeholder='Username' icon='email'/>
       {/* <TextInput /> */}
     </Screen>
   );

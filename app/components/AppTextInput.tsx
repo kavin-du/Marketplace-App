@@ -3,14 +3,20 @@ import React, { useState } from 'react'
 import { colors } from '../config/colors'
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function AppTextInput({icon, ...otherProps}: {icon?: any, otherProps?: any}) {
+type TextInputProps = {
+  icon: any,
+  [x: string]: any,
+};
+// export default function AppTextInput({icon, ...otherProps}: {icon?: any, otherProps: React.FC<Props>}) {
+export default function AppTextInput(props: TextInputProps) {
   
-  const [text, onChangeText] = useState('')
+  // const [text, onChangeText] = useState('');
+  const {icon, ...otherProps} = props;
   
   return (
     <View style={styles.container}>
       {icon && <MaterialCommunityIcons name={icon} size={20} color={colors.medium} style={styles.icon} />}
-      <TextInput style={styles.textInput} />
+      <TextInput style={styles.textInput} {...otherProps} />
     </View>
   )
 }

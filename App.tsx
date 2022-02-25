@@ -8,9 +8,14 @@ export default function App() {
 
   // return <WelcomeScreen />;
   // return <ListingScreen />
+  const categories: any = [
+    { label: 'Furniture', value: 1 },
+    { label: 'Clothing', value: 2 },
+    { label: 'Cameras', value: 3 },
+  ];
   return (
     <Screen>
-      <AppPicker placeholder="Category" icon='apps'></AppPicker>
+      <AppPicker items={categories} placeholder="Category" icon='apps'></AppPicker>
       <AppTextInput placeholder='Email' icon='email'/>
     </Screen>
   );

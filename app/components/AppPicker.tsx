@@ -6,25 +6,25 @@ import AppText from './AppText';
 import Screen from './Screen';
 import PickerItem from './PickerItem';
 
-type TextInputProps = {
+type PickerProps = {
   icon: any,
-  placeholder: string,
   items: [any],
-  [x: string]: any,
+  onSelectedItem: (x:any) => void,
+  placeholder: string,
+  selectedItem: any,
 };
-export default function AppPicker(props: TextInputProps) {
+export default function AppPicker(props: PickerProps) {
 
-  const { icon, items, placeholder } = props; // sorting props
+  const { icon, items, onSelectedItem, placeholder, selectedItem } = props; // sorting props
 
   const [showModal, setShowModal] = useState(false);
-  console.log(items.forEach((i: any) => console.log(i.label)));
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setShowModal(true)}>
         <View style={styles.container}>
           {icon && <MaterialCommunityIcons name={icon} size={20} color={defaultStyles.colors.medium} style={styles.icon} />}
-          <AppText style={styles.text}>{placeholder}</AppText>
+          <AppText style={styles.text}>{selectedItem ? selectedItem.label : placeholder}</AppText>
           <MaterialCommunityIcons
             name='chevron-down'
             size={20}
@@ -41,7 +41,10 @@ export default function AppPicker(props: TextInputProps) {
             renderItem={({ item }) => (
               <PickerItem
                 label={item.label}
-                onPress={() => console.log(item)}
+                onPress={() => {
+                  setShowModal(false);
+                  onSelectedItem(item)
+                }}
               />
             )}
           />

@@ -6,10 +6,11 @@ import AppButton from '../components/AppButton'
 import { Formik } from 'formik'
 import * as Yup from 'yup';
 import AppText from '../components/AppText'
+import ErrorMessage from '../components/ErrorMessage'
 
 // does not need to re-render every time
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email().label('Email'),
+  email: Yup.string().required().email().label('Email'), // name for the error
   password: Yup.string().required().min(4).label('Password')
 });
 
@@ -40,7 +41,7 @@ export default function LoginScreen() {
               placeholder='Email'
               textContentType='emailAddress' // only ios, get email from keychain
             />
-            <AppText style={{ color: 'red' }}>{errors.email}</AppText>
+            <ErrorMessage error={errors.email} />
             <AppTextInput
               autoCapitalize='none'
               autoCorrect={false}
@@ -50,7 +51,7 @@ export default function LoginScreen() {
               secureTextEntry
               textContentType='password' // only ios, get pw from keychain
             />
-            <AppText style={{ color: 'red' }}>{errors.password}</AppText>
+            <ErrorMessage error={errors.password} />
             <AppButton title='Submit' onPress={handleSubmit} />
 
           </>

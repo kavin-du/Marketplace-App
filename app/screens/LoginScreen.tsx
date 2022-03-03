@@ -5,8 +5,8 @@ import AppTextInput from '../components/AppTextInput'
 import AppButton from '../components/AppButton'
 import { Formik } from 'formik'
 import * as Yup from 'yup';
-import AppText from '../components/AppText'
 import ErrorMessage from '../components/ErrorMessage'
+import AppFormField from '../components/AppFormField'
 
 // does not need to re-render every time
 const validationSchema = Yup.object().shape({
@@ -15,9 +15,6 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   return (
     <Screen style={styles.container}>
       <Image
@@ -30,28 +27,26 @@ export default function LoginScreen() {
         onSubmit={values => console.log(values)}
         validationSchema={validationSchema}
       >
-        {({ handleChange, handleSubmit, errors }) => (
+        {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
           <>
-            <AppTextInput
+            <AppFormField
               autoCapitalize='none'
               autoCorrect={false}
               icon='email'
               keyboardType='email-address'
-              onChangeText={handleChange('email')}
+              name='email'
               placeholder='Email'
               textContentType='emailAddress' // only ios, get email from keychain
             />
-            <ErrorMessage error={errors.email} />
-            <AppTextInput
+            <AppFormField
               autoCapitalize='none'
               autoCorrect={false}
               icon='lock'
-              onChangeText={handleChange('password')}
+              name='password'
               placeholder='Password'
               secureTextEntry
               textContentType='password' // only ios, get pw from keychain
             />
-            <ErrorMessage error={errors.password} />
             <AppButton title='Submit' onPress={handleSubmit} />
 
           </>

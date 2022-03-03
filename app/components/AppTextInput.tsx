@@ -4,8 +4,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {defaultStyles} from '../config/styles';
 
 type TextInputProps = {
-  icon: any,
-  [x: string]: any,
+  icon?: any,
+  [x: string]: any, // list of any, which is indexed by type string
 };
 export default function AppTextInput(props: TextInputProps) {
   

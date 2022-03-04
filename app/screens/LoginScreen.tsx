@@ -7,6 +7,8 @@ import { Formik } from 'formik'
 import * as Yup from 'yup';
 import ErrorMessage from '../components/ErrorMessage'
 import AppFormField from '../components/AppFormField'
+import SubmitButton from '../components/SubmitButton'
+import AppForm from '../components/AppForm'
 
 // does not need to re-render every time
 const validationSchema = Yup.object().shape({
@@ -22,36 +24,31 @@ export default function LoginScreen() {
         source={require('../assets/logo-red.png')}
       />
 
-      <Formik
+      <AppForm
         initialValues={{ email: "", password: "" }}
-        onSubmit={values => console.log(values)}
         validationSchema={validationSchema}
       >
-        {({ handleChange, handleSubmit, errors, setFieldTouched, touched }) => (
-          <>
-            <AppFormField
-              autoCapitalize='none'
-              autoCorrect={false}
-              icon='email'
-              keyboardType='email-address'
-              name='email'
-              placeholder='Email'
-              textContentType='emailAddress' // only ios, get email from keychain
-            />
-            <AppFormField
-              autoCapitalize='none'
-              autoCorrect={false}
-              icon='lock'
-              name='password'
-              placeholder='Password'
-              secureTextEntry
-              textContentType='password' // only ios, get pw from keychain
-            />
-            <AppButton title='Submit' onPress={handleSubmit} />
+        <AppFormField
+          autoCapitalize='none'
+          autoCorrect={false}
+          icon='email'
+          keyboardType='email-address'
+          name='email'
+          placeholder='Email'
+          textContentType='emailAddress' // only ios, get email from keychain
+        />
+        <AppFormField
+          autoCapitalize='none'
+          autoCorrect={false}
+          icon='lock'
+          name='password'
+          placeholder='Password'
+          secureTextEntry
+          textContentType='password' // only ios, get pw from keychain
+        />
 
-          </>
-        )}
-      </Formik>
+        <SubmitButton title='Submit' />
+      </AppForm>
 
     </Screen>
   )

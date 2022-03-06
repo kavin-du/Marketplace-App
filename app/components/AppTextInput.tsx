@@ -5,15 +5,15 @@ import { defaultStyles } from '../config/styles';
 
 type TextInputProps = {
   icon?: any,
+  width?: any,
   [x: string]: any, // list of any, which is indexed by type string
 };
 export default function AppTextInput(props: TextInputProps) {
 
-  // const [text, onChangeText] = useState('');
-  const { icon, ...otherProps } = props;
+  const { icon, width = '100%', ...otherProps } = props;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {width}]}>
       {icon && <MaterialCommunityIcons name={icon} size={20} color={defaultStyles.colors.medium} style={styles.icon} />}
       <TextInput
         placeholderTextColor={defaultStyles.colors.medium}
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 25,
     flexDirection: 'row',
-    width: '100%',
     padding: 15,
     marginVertical: 10,
   },

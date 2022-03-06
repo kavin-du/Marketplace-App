@@ -1,4 +1,4 @@
-import { Platform, SafeAreaView, StatusBar, StyleProp, StyleSheet, Text, View } from 'react-native'
+import {SafeAreaView, StyleProp, StyleSheet } from 'react-native'
 import React from 'react'
 import Constants from 'expo-constants'
 

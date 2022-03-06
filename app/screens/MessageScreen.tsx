@@ -10,7 +10,7 @@ const initialMessages = [
     {
         id: 1,
         title: 'T1',
-        description: 'D1',
+        description: 'D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1',
         image: require('../assets/chair.jpg'),
     },
     {

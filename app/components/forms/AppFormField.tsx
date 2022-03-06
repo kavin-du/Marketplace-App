@@ -6,6 +6,7 @@ import { FormikErrors, FormikTouched, useFormikContext } from 'formik'
 
 type AppFormFieldProps = {
   name: string,
+  width?: any,
   [x: string]: any, // list of any, which is indexed by type string
 }
 
@@ -18,13 +19,14 @@ type ErrorsType = FormikErrors<{email: string; password: string;}>;
 export default function AppFormField(props: AppFormFieldProps) {
   const {errors, handleChange, setFieldTouched, touched}: 
         {errors: ErrorsType, handleChange: any, setFieldTouched: any, touched: TouchedType} = useFormikContext();
-  const { name, ...otherProps } = props;
+  const { name, width, ...otherProps } = props;
 
   return (
     <>
       <AppTextInput
         onBlur={() => setFieldTouched(name)}
         onChangeText={handleChange(name)}
+        width={width}
         {...otherProps}
       />
       <ErrorMessage visible={touched[name as keyof TouchedType]} error={errors[name as keyof ErrorsType]} />

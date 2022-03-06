@@ -27,7 +27,7 @@ import Screen from '../components/Screen';
 
 export default function ListingEditScreen() {
   return (
-    <Screen >
+    <Screen style={styles.screen}>
       <AppForm
         initialValues={{
           title: '',
@@ -43,11 +43,13 @@ export default function ListingEditScreen() {
           maxLength={8} // 10000.00
           name='price'
           placeholder='Price'
+          width={120}
         />
         <AppFormPicker
           items={categories}
           name='category'
           placeholder='Category'
+          width='50%'
         />
         <AppFormField
           maxLength={255}
@@ -62,4 +64,8 @@ export default function ListingEditScreen() {
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  screen: {
+    padding: 10
+  }
+})

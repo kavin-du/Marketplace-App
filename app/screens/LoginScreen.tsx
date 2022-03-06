@@ -1,14 +1,9 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import { Image, StyleSheet } from 'react-native'
+import React from 'react'
 import Screen from '../components/Screen'
-import AppTextInput from '../components/AppTextInput'
-import AppButton from '../components/AppButton'
-import { Formik } from 'formik'
 import * as Yup from 'yup';
-import ErrorMessage from '../components/ErrorMessage'
-import AppFormField from '../components/AppFormField'
-import SubmitButton from '../components/SubmitButton'
-import AppForm from '../components/AppForm'
+
+import { AppForm, AppFormField, SubmitButton } from '../components/forms/index';
 
 // does not need to re-render every time
 const validationSchema = Yup.object().shape({

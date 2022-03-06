@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import AppText from './AppText'
+import AppText from '../AppText'
 
 export default function ErrorMessage({error, visible}: {error?: string, visible?: boolean}) {
   if(!visible) return null; // return only when touched

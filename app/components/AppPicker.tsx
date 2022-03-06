@@ -9,14 +9,16 @@ import PickerItem from './PickerItem';
 type PickerProps = {
   icon: any,
   items: [any],
+  numberOfColumns?: number,
   onSelectedItem: (x:any) => void,
+  PickerItemComponent?: any,
   placeholder: string,
   selectedItem: any,
   width?: any,
 };
 export default function AppPicker(props: PickerProps) {
 
-  const { icon, items, onSelectedItem, placeholder, selectedItem, width='100%' } = props; // sorting props
+  const { icon, items,numberOfColumns = 1, onSelectedItem, PickerItemComponent = PickerItem, placeholder, selectedItem, width='100%' } = props; // sorting props
 
   const [showModal, setShowModal] = useState(false);
 
@@ -42,8 +44,10 @@ export default function AppPicker(props: PickerProps) {
           <FlatList
             data={items}
             keyExtractor={item => item.value.toString()}
+            numColumns={numberOfColumns}
             renderItem={({ item }) => (
-              <PickerItem
+              <PickerItemComponent
+                item={item}
                 label={item.label}
                 onPress={() => {
                   setShowModal(false);

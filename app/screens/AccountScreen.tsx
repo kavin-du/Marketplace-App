@@ -5,6 +5,7 @@ import ListItem from '../components/ListItem'
 import { colors } from '../config/colors';
 import Icon from '../components/Icon';
 import ListItemSeparator from '../components/ListItemSeparator';
+import { useNavigation } from '@react-navigation/native';
 
 const menuItems = [
   {
@@ -19,11 +20,14 @@ const menuItems = [
     icon: {
       name: 'email',
       backgroundColor: colors.secondary
-    }
+    },
+    targetScreen: "Messages",
   },
 ];
 
 export default function AccountScreen() {
+  const navigation = useNavigation();
+
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
@@ -48,6 +52,7 @@ export default function AccountScreen() {
                   backgroundColor={item.icon.backgroundColor}
                 />
               }
+              onPress={() => navigation.navigate(item.targetScreen as string)}
             />
           }
         />

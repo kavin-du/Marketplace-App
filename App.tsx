@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from "react";
-import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions';
+import React from "react";
 
-import Screen from './app/components/Screen';
-import { Button, Image } from "react-native";
-import ImageInput from "./app/components/ImageInput";
-import ImageInputList from "./app/components/ImageInputList";
-import ListingEditScreen from "./app/screens/ListingEditScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import navigationTheme from "./app/navigation/navigationTheme";
+import AppNavigator from "./app/navigation/AppNavigator";
+
 
 export default function App() {
-
-  // const [imageUris, setImageUris] = useState<string[]>([]);
-
-  // const handleAdd = (uri: string) => {
-  //   setImageUris([...imageUris, uri]);
-  // }
-
-  // const handleRemove = (uri: string) => {
-  //   setImageUris(imageUris.filter(imageUri => imageUri !== uri));
-  // }
-
-  // return <Screen>
-  //   <ImageInputList
-  //     imageUris={imageUris}
-  //     onAddImage={handleAdd}
-  //     onRemoveImage={handleRemove} />
-  // </Screen>;
-
-  return <ListingEditScreen />;
+  return (
+    <NavigationContainer theme={navigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
+  );
 
 }

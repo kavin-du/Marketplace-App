@@ -30,7 +30,7 @@ export default function AccountScreen() {
         <ListItem
           title='kavindu'
           subtitle='kavindu@chamith.com'
-          image={require('../assets/chair.jpg')}
+          image={require('../assets/portrait.jpg')}
         />
       </View>
 

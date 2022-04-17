@@ -11,13 +11,13 @@ const initialMessages = [
         id: 1,
         title: 'T1',
         description: 'D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1D1',
-        image: require('../assets/chair.jpg'),
+        image: require('../assets/watch.jpg'),
     },
     {
         id: 2,
         title: 'T2',
         description: 'D2',
-        image: require('../assets/chair.jpg'),
+        image: require('../assets/watch.jpg'),
     }
 ];
 
@@ -51,7 +51,7 @@ export default function MessageScreen() {
                         id: 2,
                         title: 'T2',
                         description: 'D2',
-                        image: require('../assets/chair.jpg'),
+                        image: require('../assets/watch.jpg'),
                     }]);
                 }}
             />

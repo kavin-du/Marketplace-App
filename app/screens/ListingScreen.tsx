@@ -3,23 +3,26 @@ import React from 'react'
 import Screen from '../components/Screen';
 import Card from '../components/Card';
 import { colors } from '../config/colors';
+import { useNavigation } from '@react-navigation/native';
 
 const listings = [
     {
         id: 1,
-        title: 'Red jacket for sale',
+        title: 'Nice watch you',
         price: 100,
-        image: require('../assets/chair.jpg'),
+        image: require('../assets/watch.jpg'),
     },
     {
         id: 2,
-        title: 'Couch in great condition',
+        title: 'Used laptop',
         price: 1000,
-        image: require('../assets/chair.jpg'),
+        image: require('../assets/laptop.jpg'),
     },
 ];
 
 export default function ListingScreen() {
+  const navigation = useNavigation();
+
   return (
       <Screen style={styles.screen}>
           <FlatList 
@@ -30,6 +33,7 @@ export default function ListingScreen() {
                   title={item.title}
                   subTitle={'$' + item.price}
                   image={item.image}
+                  onPress={() => navigation.navigate("ListingDetails", item)}
                 />
             }
           />

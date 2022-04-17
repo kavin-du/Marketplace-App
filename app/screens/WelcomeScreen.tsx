@@ -1,7 +1,10 @@
-import { Button, Image, ImageBackground, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import {  Image, ImageBackground, StyleSheet, Text, View } from "react-native";
 import AppButton from "../components/AppButton";
 
 export default function WelcomeScreen() {
+
+    const navigation = useNavigation();
 
     return (
         <ImageBackground blurRadius={5} source={require('../assets/background.jpg')} style={styles.background} >
@@ -10,8 +13,8 @@ export default function WelcomeScreen() {
                 <Text style={styles.tagline}>Sell what you don't need</Text>
             </View>
             <View style={styles.buttonContainer}>
-                <AppButton title="Login" onPress={() => console.log('pressed')}></AppButton>
-                <AppButton title="Register" onPress={() => console.log('pressed')} color='secondary'></AppButton>
+                <AppButton title="Login" onPress={() => navigation.navigate("Login")}></AppButton>
+                <AppButton title="Register" onPress={() => navigation.navigate("Register")} color='secondary'></AppButton>
             </View>
         </ImageBackground>
 

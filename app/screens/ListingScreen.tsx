@@ -9,6 +9,7 @@ import routes from '../navigation/routes';
 import AppText from '../components/AppText';
 import AppButton from '../components/AppButton';
 import ActivityIndicator from '../components/ActivityIndicator';
+import useApi from '../hooks/useApi';
 
 // const listings = [
 //     {
@@ -28,26 +29,16 @@ import ActivityIndicator from '../components/ActivityIndicator';
 export default function ListingScreen() {
   const navigation = useNavigation();
 
-  const [listings, setListings] = useState<any[]>([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // rename when destructuring
+  const { data: listings, error, loading, request: loadListings } =  useApi(listingsApi.getListings);
+  
 
   // execute only once
   useEffect(() => {
     loadListings();
   }, []);
 
-  const loadListings = async () => {
-    // cannot await inside useeffect, therefore a seperate function
-    setLoading(true);
-    const response: any = await listingsApi.getListings();
-    setLoading(false);
-
-    if(!response.ok) return setError(true);
-
-    setError(false);
-    setListings(response.data);
-  }
+  
 
   return (
       <Screen style={styles.screen}>

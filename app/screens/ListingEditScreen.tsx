@@ -28,21 +28,35 @@ import Screen from '../components/Screen';
 import CategoryPickerItem from '../components/CategoryPickerItem';
 import FormImagePicker from '../components/forms/FormImagePicker';
 import useLocation from '../hooks/useLocation';
+import UploadScreen from './UploadScreen';
 
 export default function ListingEditScreen() {
 
   const location = useLocation();
-  
-  const handleSubmit = async (listing: any) => {
-    const result = await listingsApi.addListing({...listing, location});
-    if(!result.ok) 
+
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const handleSubmit = async (listing: any, { resetForm }: any) => {
+    setProgress(0); // resetting the progress before each upload
+    setUploadVisible(true)
+    const result = await listingsApi.addListing(
+      { ...listing, location },
+      (progress: any) => setProgress(progress)
+    );
+
+    if (!result.ok) {
+      setUploadVisible(false);
       return alert('Could not save the listing.');
-    
-    alert('Success');
+    }
+
+    resetForm();
+
   }
 
   return (
     <Screen style={styles.screen}>
+      <UploadScreen onDone={() => setUploadVisible(false)} progress={progress} visible={uploadVisible} />
       <AppForm
         initialValues={{
           title: '',

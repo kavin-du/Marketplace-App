@@ -17,15 +17,16 @@ type ErrorsType = FormikErrors<{email: string; password: string;}>;
 // therefore no need to dril a type for props
 
 export default function AppFormField(props: AppFormFieldProps) {
-  const {errors, handleChange, setFieldTouched, touched}: 
-        {errors: ErrorsType, handleChange: any, setFieldTouched: any, touched: TouchedType} = useFormikContext();
+  const {errors, setFieldTouched, setFieldValue, touched, values}: 
+        {errors: ErrorsType, setFieldTouched: any, setFieldValue: any, touched: TouchedType, values: any} = useFormikContext();
   const { name, width, ...otherProps } = props;
 
   return (
     <>
       <AppTextInput
         onBlur={() => setFieldTouched(name)}
-        onChangeText={handleChange(name)}
+        onChangeText={(text: string) => setFieldValue(name, text)}
+        value={values[name]}
         width={width}
         {...otherProps}
       />

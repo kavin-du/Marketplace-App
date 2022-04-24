@@ -23,8 +23,10 @@ const addListing = (listing: any, onUploadProgress: any) => {
   }
 
   return client.post(endpoint, data, {
-    onUploadProgress: (progress) => 
+    onUploadProgress: (progress) => {
+      console.log(progress.loaded / progress.total);      
       onUploadProgress(progress.loaded / progress.total)
+    }
   });
 
 }

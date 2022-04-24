@@ -42,7 +42,7 @@ export default function ListingEditScreen() {
     setUploadVisible(true)
     const result = await listingsApi.addListing(
       { ...listing, location },
-      (progress: any) => setProgress(progress)
+      (progress: number) => setProgress(progress)
     );
 
     if (!result.ok) {

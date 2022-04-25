@@ -7,6 +7,7 @@ import Icon from '../components/Icon';
 import ListItemSeparator from '../components/ListItemSeparator';
 import { useNavigation } from '@react-navigation/native';
 import AuthContext from '../auth/context';
+import authStorage from '../auth/storage';
 
 const menuItems = [
   {
@@ -30,6 +31,11 @@ export default function AccountScreen() {
   const navigation = useNavigation();
 
   const { user, setUser } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    setUser(null);
+    authStorage.removeToken(); // no need to await bcz not necessary
+  }
 
   return (
     <Screen style={styles.screen}>
@@ -66,7 +72,7 @@ export default function AccountScreen() {
         IconComponent={
           <Icon name='logout' backgroundColor='#ffe66d' />
         }
-        onPress={() => setUser(null)}
+        onPress={handleLogout}
       />
     </Screen>
   )

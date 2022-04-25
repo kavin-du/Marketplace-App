@@ -7,6 +7,7 @@ import { ErrorMessage, AppForm, AppFormField, SubmitButton } from '../components
 import authApi from '../api/auth';
 import jwtDecode from 'jwt-decode';
 import AuthContext from '../auth/context';
+import authStorage from '../auth/storage';
 
 // does not need to re-render every time
 const validationSchema = Yup.object().shape({
@@ -19,12 +20,14 @@ export default function LoginScreen() {
 
   const [loginFailed, setLoginFailed] = useState(false);
 
-  const handleSubmit = async ({ email, pwd }: {email: string, pwd: string}) => {
-    const result = await authApi.login(email, pwd);
+  const handleSubmit = async ({ email, password }: {email: string, password: string}) => {
+    const result = await authApi.login(email, password);
+    
     if(!result.ok) return setLoginFailed(true);
     setLoginFailed(false);
     const user = jwtDecode(result.data as string);
     authContext.setUser(user);
+    authStorage.storeToken(result.data as string);
   }
 
   return (

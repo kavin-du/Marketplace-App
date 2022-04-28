@@ -6,16 +6,16 @@ const useApi = (apiFunc: any) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const request = async () => {
+  const request = async (...args: any[]) => {
     // cannot await inside useeffect, therefore a seperate function
     setLoading(true);
-    const response: any = await apiFunc();
+    const response: any = await apiFunc(...args);
     setLoading(false);
+    
+    setError(!response.ok);
+    setData(response.data); // we set the data if there is error or not, no harm in doing that
 
-    if(!response.ok) return setError(true);
-
-    setError(false);
-    setData(response.data);
+    return response;
   }
 
   return { data, error, loading, request };

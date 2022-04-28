@@ -11,61 +11,45 @@ import AppButton from '../components/AppButton';
 import ActivityIndicator from '../components/ActivityIndicator';
 import useApi from '../hooks/useApi';
 
-// const listings = [
-//     {
-//         id: 1,
-//         title: 'Nice watch you',
-//         price: 100,
-//         image: require('../assets/watch.jpg'),
-//     },
-//     {
-//         id: 2,
-//         title: 'Used laptop',
-//         price: 1000,
-//         image: require('../assets/laptop.jpg'),
-//     },
-// ];
 
 export default function ListingScreen() {
   const navigation = useNavigation();
 
   // rename when destructuring
-  const { data: listings, error, loading, request: loadListings } =  useApi(listingsApi.getListings);
-  
+  const { data: listings, error, loading, request: loadListings } = useApi(listingsApi.getListings);
 
   // execute only once
   useEffect(() => {
     loadListings();
   }, []);
 
-  
-
   return (
+    <>
+      <ActivityIndicator visible={loading} />
       <Screen style={styles.screen}>
         {error && (
           <>
-          <AppText>Couldn't retrieve the listings.</AppText>
-          <AppButton title='Retry' onPress={loadListings} />
+            <AppText>Couldn't retrieve the listings.</AppText>
+            <AppButton title='Retry' onPress={loadListings} />
           </>
         )}
-        <ActivityIndicator visible={loading} />
-        <FlatList 
+        <FlatList
           data={listings}
           keyExtractor={listing => listing.id.toString()}
-          renderItem={({ item }) => 
-              <Card 
-                title={item.title}
-                subTitle={'$' + item.price}
-                imageUrl={item.images[0].url}
-                thumbnailUrl={item.images[0].thumbnailUrl}
-                onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
-              />
+          renderItem={({ item }) =>
+            <Card
+              title={item.title}
+              subTitle={'$' + item.price}
+              imageUrl={item.images[0].url}
+              thumbnailUrl={item.images[0].thumbnailUrl}
+              onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+            />
           }
         />
       </Screen>
-    
-    )
-  }
+    </>
+  )
+}
 
 const styles = StyleSheet.create({
   screen: {

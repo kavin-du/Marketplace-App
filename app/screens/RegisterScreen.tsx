@@ -7,6 +7,8 @@ import { ErrorMessage, AppForm, AppFormField, SubmitButton } from '../components
 import authApi from '../api/auth';
 import useAuth from '../auth/useAuth';
 import userApi from '../api/users';
+import useApi from '../hooks/useApi';
+import ActivityIndicator from '../components/ActivityIndicator';
 
 // does not need to re-render every time
 const validationSchema = Yup.object().shape({
@@ -16,24 +18,27 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function RegisterScreen() {
+  const registerApi = useApi(userApi.register);
+  const loginApi = useApi(authApi.login);
+
   const auth = useAuth(); // context from the root
 
   const [error, setError] = useState('');
 
   const handleSubmit = async (userInfo: any) => {
-    const result: any = await userApi.register(userInfo);
-    
-    if(!result.ok) {
-      if(result.data) setError(result.data.error);
+    const result: any = await registerApi.request(userInfo);
+
+    if (!result.ok) {
+      if (result.data) setError(result.data.error);
       else {
         setError('An unexpected error occured.');
         console.log(result);
       }
       return;
     }
-    // after registration, login the user automatically
 
-    const { data: authToken } = await authApi.login(
+    // after registration, login the user automatically
+    const { data: authToken } = await loginApi.request(
       userInfo.email,
       userInfo.password
     );
@@ -41,45 +46,47 @@ export default function RegisterScreen() {
   }
 
   return (
-    <Screen style={styles.container}>
+    <>
+      <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
+      <Screen style={styles.container}>
+        <AppForm
+          initialValues={{ name: "", email: "", password: "" }}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}
+        >
+          <AppFormField
+            autoCapitalize='none'
+            autoCorrect={false}
+            icon='account'
+            name='name'
+            placeholder='Name'
+            textContentType='name' // only ios, get email from keychain
+          />
 
-      <AppForm
-        initialValues={{ name: "", email: "", password: "" }}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}
-      >
-        <AppFormField
-          autoCapitalize='none'
-          autoCorrect={false}
-          icon='account'
-          name='name'
-          placeholder='Name'
-          textContentType='name' // only ios, get email from keychain
-        />
+          <AppFormField
+            autoCapitalize='none'
+            autoCorrect={false}
+            icon='email'
+            keyboardType='email-address'
+            name='email'
+            placeholder='Email'
+            textContentType='emailAddress' // only ios, get email from keychain
+          />
+          <AppFormField
+            autoCapitalize='none'
+            autoCorrect={false}
+            icon='lock'
+            name='password'
+            placeholder='Password'
+            secureTextEntry
+            textContentType='password' // only ios, get pw from keychain
+          />
 
-        <AppFormField
-          autoCapitalize='none'
-          autoCorrect={false}
-          icon='email'
-          keyboardType='email-address'
-          name='email'
-          placeholder='Email'
-          textContentType='emailAddress' // only ios, get email from keychain
-        />
-        <AppFormField
-          autoCapitalize='none'
-          autoCorrect={false}
-          icon='lock'
-          name='password'
-          placeholder='Password'
-          secureTextEntry
-          textContentType='password' // only ios, get pw from keychain
-        />
+          <SubmitButton title='Register' />
+        </AppForm>
 
-        <SubmitButton title='Register' />
-      </AppForm>
-
-    </Screen>
+      </Screen>
+    </>
   )
 }
 

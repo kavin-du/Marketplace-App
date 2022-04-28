@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import AppLoading from 'expo-app-loading';
 
 import { NavigationContainer } from "@react-navigation/native";
 import navigationTheme from "./app/navigation/navigationTheme";
@@ -7,20 +8,23 @@ import AuthNavigator from "./app/navigation/AuthNavigator";
 import AuthContext from "./app/auth/context";
 import AppNavigator from "./app/navigation/AppNavigator";
 import authStorage from "./app/auth/storage";
-import jwtDecode from "jwt-decode";
 
 export default function App() {
   const [user, setUser]  = useState();
+  const[isReady, setIsReady] = useState(false);
 
-  const restoreToken = async () => {
-    const token = await authStorage.getToken();
-    if(!token) return;
-    setUser(jwtDecode(token));
+  const restoreUser = async () => {
+    const user:any = await authStorage.getUser();
+    if(user) setUser(user);
   }
 
-  useEffect(() => {
-    restoreToken();
-  }, []); // call only once
+  // useEffect(() => {
+  //   restoreUser();
+  // }, []); // call only once
+
+  if(!isReady) {
+    return <AppLoading startAsync={restoreUser} onFinish={() => setIsReady(true)} onError={(e) => console.log(e)} />;
+  }
 
   // context passed down to component tree
   // context only for small object that doesn't change much

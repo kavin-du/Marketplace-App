@@ -1,13 +1,11 @@
 import { Image, StyleSheet } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import Screen from '../components/Screen'
 import * as Yup from 'yup';
 
 import { ErrorMessage, AppForm, AppFormField, SubmitButton } from '../components/forms/index';
 import authApi from '../api/auth';
-import jwtDecode from 'jwt-decode';
-import AuthContext from '../auth/context';
-import authStorage from '../auth/storage';
+import useAuth from '../auth/useAuth';
 
 // does not need to re-render every time
 const validationSchema = Yup.object().shape({
@@ -16,7 +14,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function LoginScreen() {
-  const authContext = useContext(AuthContext); // context from the root
+  const auth = useAuth(); // context from the root
 
   const [loginFailed, setLoginFailed] = useState(false);
 
@@ -25,9 +23,7 @@ export default function LoginScreen() {
     
     if(!result.ok) return setLoginFailed(true);
     setLoginFailed(false);
-    const user = jwtDecode(result.data as string);
-    authContext.setUser(user);
-    authStorage.storeToken(result.data as string);
+    auth.logIn(result.data as string); // using the hook
   }
 
   return (

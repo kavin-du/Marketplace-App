@@ -1,5 +1,5 @@
-import { Platform, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, TextInput, View } from 'react-native'
+import React from 'react'
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { defaultStyles } from '../config/styles';
 

@@ -7,6 +7,7 @@ import Icon from '../components/Icon';
 import ListItemSeparator from '../components/ListItemSeparator';
 import { useNavigation } from '@react-navigation/native';
 import useAuth from '../auth/useAuth';
+import routes from '../navigation/routes';
 
 const menuItems = [
   {
@@ -14,7 +15,8 @@ const menuItems = [
     icon: {
       name: 'format-list-bulleted',
       backgroundColor: colors.primary
-    }
+    },
+    targetScreen: routes.MESSAGES, // change this to some other screen
   },
   {
     title: 'My messages',
@@ -22,7 +24,7 @@ const menuItems = [
       name: 'email',
       backgroundColor: colors.secondary
     },
-    targetScreen: "Messages",
+    targetScreen: routes.MESSAGES,
   },
 ];
 

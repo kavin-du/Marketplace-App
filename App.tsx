@@ -15,6 +15,10 @@ import Screen from "./app/components/Screen";
 import AppButton from "./app/components/AppButton";
 import { NotificationRequestInput } from "expo-notifications";
 
+import logger from './app/utility/logger';
+
+logger.start();
+
 Notifications.setNotificationHandler({
   handleNotification: async () => {
     return {
@@ -26,6 +30,8 @@ Notifications.setNotificationHandler({
 });
 
 export default function App() {
+  logger.log(new Error('test error'));
+
   const [user, setUser]  = useState();
   const[isReady, setIsReady] = useState(false);
 
